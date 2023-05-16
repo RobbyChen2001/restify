@@ -115,3 +115,4 @@ function Register() {
       xhr.send(JSON.stringify(userData));
     }
   };
+}
