@@ -7,17 +7,9 @@ from phonenumber_field.modelfields import PhoneNumberField
 class CustomUser(AbstractUser):
     is_host = models.BooleanField(default=False)
     phone = PhoneNumberField(null=True, blank=True, default="")
+    profile_picture = models.ImageField(upload_to='user_portfolios')
 
     class Meta:
         verbose_name = 'CustomUser'
         verbose_name_plural = 'CustomUsers'
 
-
-class UserProfile(models.Model):
-    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
-    portfolio_picture = models.ImageField(upload_to='portfolio_pictures/', null=True, blank=True)
-
-    # Additional fields for user profile
-
-    def __str__(self):
-        return self.user.username
