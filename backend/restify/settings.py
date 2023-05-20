@@ -30,6 +30,7 @@ ALLOWED_HOSTS = []
 APPEND_SLASH = False
 
 # Application definition
+AUTH_USER_MODEL = 'accounts.CustomUser'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [

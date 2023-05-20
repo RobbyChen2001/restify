@@ -141,11 +141,11 @@ function Register() {
                 id="username"
                 label="Username"
                 name="username"
-                autoComplete="username"
+                autoComplete="off"
                 autoFocus
                 error={usernameError.length > 0}
                 helperText={usernameError}
-                onChange={(event) => {
+                onBlur={(event) => {
                   setUsername(event.target.value);
                   validate_username();
                 }}
@@ -154,7 +154,7 @@ function Register() {
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  autoComplete="given-name"
+                  autoComplete="off"
                   name="firstName"
                   required
                   fullWidth
@@ -162,7 +162,7 @@ function Register() {
                   label="First Name"
                   error={firstNameError.length > 0}
                   helperText={firstNameError}
-                  onChange={(event) => {
+                  onBlur={(event) => {
                     setFirst(event.target.value);
                     validate_first_name();
                   }}
@@ -175,10 +175,10 @@ function Register() {
                   id="lastName"
                   label="Last Name"
                   name="lastName"
-                  autoComplete="family-name"
+                  autoComplete="off"
                   error={lastNameError.length > 0}
                   helperText={lastNameError}
-                  onChange={(event) => {
+                  onBlur={(event) => {
                     setLast(event.target.value);
                     validate_last_name();
                   }}
@@ -191,10 +191,10 @@ function Register() {
                   id="email"
                   label="Email Address"
                   name="email"
-                  autoComplete="email"
+                  autoComplete="off"
                   error={emailError.length > 0}
                   helperText={emailError}
-                  onChange={(event) => {
+                  onBlur={(event) => {
                     setEmail(event.target.value);
                     validate_email();
                   }}
@@ -208,10 +208,10 @@ function Register() {
                   label="Password"
                   type="password"
                   id="password"
-                  autoComplete="new-password"
+                  autoComplete="off"
                   error={passwordError.length > 0}
                   helperText={passwordError}
-                  onChange={(event) => {
+                  onBlur={(event) => {
                     setPassword(event.target.value);
                     validate_password();
                   }}
