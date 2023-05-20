@@ -72,14 +72,15 @@ class UpdateProfileView(APIView):
         user = request.user
         serializer = UpdateUserSerializer(user, data=request.data, partial=True)
         if serializer.is_valid():
+            
             serializer.save()
-
             if not user.is_active:
                 # Reactivate the user
                 user.is_active = True
                 user.save()
                 
             return Response(serializer.data)
+        print(serializer.errors)
         return Response(serializer.errors, status=400)
     
 class UserCommentsListView(generics.ListAPIView):

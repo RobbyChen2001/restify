@@ -9,32 +9,35 @@ import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import Logout from "@mui/icons-material/Logout";
 
-import NotificationsIcon from '@mui/icons-material/Notifications';
-import BookmarkIcon from '@mui/icons-material/Bookmark';
-import AddBusinessIcon from '@mui/icons-material/AddBusiness';
-import ProfileSettings from './ProfileSettings';
+import NotificationsIcon from "@mui/icons-material/Notifications";
+import BookmarkIcon from "@mui/icons-material/Bookmark";
+import AddBusinessIcon from "@mui/icons-material/AddBusiness";
+import ProfileSettings from "./ProfileSettings";
 
-import { Link as RouterLink } from 'react-router-dom';
+import LoginIcon from "@mui/icons-material/Login";
+import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
+
+import { Link as RouterLink } from "react-router-dom";
 
 function loggedIn() {
   return localStorage.getItem("access_token") != null;
 }
 
 async function refreshAccessToken() {
-  const url = 'http://localhost:8000/accounts/api/token/refresh/';
+  const url = "http://localhost:8000/accounts/api/token/refresh/";
   const response = await fetch(url, {
-    method: 'POST',
-    body: JSON.stringify({ "refresh": localStorage.getItem('refresh_token') }),
+    method: "POST",
+    body: JSON.stringify({ refresh: localStorage.getItem("refresh_token") }),
     headers: {
-      'Content-Type': 'application/json'
-    }
+      "Content-Type": "application/json",
+    },
   });
   const data = await response.json();
   if (!response.ok) {
     throw new Error(data.detail);
   }
-  console.log("data", data)
-  localStorage.setItem('access_token', data.access);
+  console.log("data", data);
+  localStorage.setItem("access_token", data.access);
 }
 
 // Handle logging out
@@ -43,7 +46,10 @@ function handleLogout() {
     const xhr = new XMLHttpRequest();
     xhr.open("POST", "http://localhost:8000/accounts/logout/");
     xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.setRequestHeader("Authorization", `Bearer ${localStorage.getItem("access_token")}`);
+    xhr.setRequestHeader(
+      "Authorization",
+      `Bearer ${localStorage.getItem("access_token")}`
+    );
     xhr.onload = function () {
       if (xhr.status === 200) {
         // Logout was successful, clear local storage and redirect user to login page
@@ -53,9 +59,11 @@ function handleLogout() {
         console.log(xhr.responseText);
       }
     };
-    xhr.send(JSON.stringify({ "refresh_token": localStorage.getItem("refresh_token") }));
+    xhr.send(
+      JSON.stringify({ refresh_token: localStorage.getItem("refresh_token") })
+    );
   });
-};
+}
 
 export default function AccountMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -99,7 +107,7 @@ export default function AccountMenu() {
               width: 32,
               height: 32,
               ml: -0.5,
-              mr: 1
+              mr: 1,
             },
             "&:before": {
               content: '""',
@@ -111,49 +119,82 @@ export default function AccountMenu() {
               height: 10,
               bgcolor: "background.paper",
               transform: "translateY(-50%) rotate(45deg)",
-              zIndex: 0
-            }
-          }
+              zIndex: 0,
+            },
+          },
         }}
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <MenuItem onClick={handleClose} component={RouterLink} to="/profile">
-          <Avatar /> My Account
-        </MenuItem>
-        <MenuItem onClick={handleClose} component={RouterLink} to="/notification">
-          <ListItemIcon>
-            <NotificationsIcon fontSize="small" />
-          </ListItemIcon>
-          Notifications
-        </MenuItem>
-        <Divider />
-        <MenuItem onClick={handleClose} component={RouterLink} to="/reservations">
-          <ListItemIcon>
-            <BookmarkIcon fontSize="small" />
-          </ListItemIcon>
-          My Reservations
-        </MenuItem>
-        <MenuItem onClick={handleClose} component={RouterLink} to="/propertyhost">
-          <ListItemIcon>
-            <AddBusinessIcon fontSize="small" />
-          </ListItemIcon>
-          My Hostings
-        </MenuItem>
         {loggedIn() ? (
-          <MenuItem onClick={handleLogout}>
-            <ListItemIcon>
-              <Logout fontSize="small" />
-            </ListItemIcon>
-            Logout
-          </MenuItem>
+          <Box>
+            <MenuItem
+              onClick={handleClose}
+              component={RouterLink}
+              to="/profile"
+            >
+              <ListItemIcon>
+                <Avatar fontSize="small" />
+              </ListItemIcon>
+              My Account
+            </MenuItem>
+            <MenuItem
+              onClick={handleClose}
+              component={RouterLink}
+              to="/notification"
+            >
+              <ListItemIcon>
+                <NotificationsIcon fontSize="small" />
+              </ListItemIcon>
+              Notifications
+            </MenuItem>
+            <Divider />
+            <MenuItem
+              onClick={handleClose}
+              component={RouterLink}
+              to="/reservations"
+            >
+              <ListItemIcon>
+                <BookmarkIcon fontSize="small" />
+              </ListItemIcon>
+              My Reservations
+            </MenuItem>
+            <MenuItem
+              onClick={handleClose}
+              component={RouterLink}
+              to="/propertyhost"
+            >
+              <ListItemIcon>
+                <AddBusinessIcon fontSize="small" />
+              </ListItemIcon>
+              My Hostings
+            </MenuItem>
+            <MenuItem onClick={handleLogout}>
+              <ListItemIcon>
+                <Logout fontSize="small" />
+              </ListItemIcon>
+              Logout
+            </MenuItem>
+          </Box>
         ) : (
-          <MenuItem onClick={handleClose} component={RouterLink} to="/register">
-            <ListItemIcon>
-              <Logout fontSize="small" />
-            </ListItemIcon>
-            Signup
-          </MenuItem>
+          <Box>
+            <MenuItem onClick={handleClose} component={RouterLink} to="/login">
+              <ListItemIcon>
+                <LoginIcon fontSize="small" />
+              </ListItemIcon>
+              Login
+            </MenuItem>
+            <MenuItem
+              onClick={handleClose}
+              component={RouterLink}
+              to="/register"
+            >
+              <ListItemIcon>
+                <AppRegistrationIcon fontSize="small" />
+              </ListItemIcon>
+              Signup
+            </MenuItem>
+          </Box>
         )}
       </Menu>
     </React.Fragment>

@@ -32,6 +32,11 @@ APPEND_SLASH = False
 # Application definition
 AUTH_USER_MODEL = 'accounts.CustomUser'
 
+MEDIA_ROOT = '/path/to/media/'
+
+MEDIA_URL = '/media/'
+
+
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',

@@ -2,6 +2,7 @@ from django.urls import path, include
 from . import views
 from rest_framework_simplejwt import views as jwt_views
 
+
 app_name = 'accounts'
 
 urlpatterns = [ 
