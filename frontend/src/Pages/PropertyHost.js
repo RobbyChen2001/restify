@@ -12,6 +12,8 @@ import MobileFooter from "../components/MobileFooter";
 
 import Typography from "@mui/material/Typography";
 
+import HostingDial from "../components/HostingDial";
+
 
 function PropertyHost() {
     return (
@@ -49,9 +51,10 @@ function PropertyHost() {
                 >
                   My Hostings
                 </Typography>
-    
                 <Divider sx={{ mb: 1 }} />
-    
+                
+                
+                <HostingDial />
                 <PropertyCardsDisplay />
                 <Box
                   sx={{
