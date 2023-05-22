@@ -20,7 +20,7 @@ import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
 import { Link as RouterLink } from "react-router-dom";
 
 function loggedIn() {
-  return localStorage.getItem("access_token") != null;
+  return localStorage.getItem("access_token") != null || undefined;
 }
 
 async function refreshAccessToken() {

@@ -18,6 +18,8 @@ class Property(models.Model):
     description = models.CharField(max_length=200)
     amenities = models.CharField(max_length=200)
     available_dates = models.DateTimeField(null=True)
+    #price = models.DecimalField(max_digits=10, decimal_places=2)
+    #TODO make the images a list of images
 
     def __str__(self):
         return self.property_id

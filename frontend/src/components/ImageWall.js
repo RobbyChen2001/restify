@@ -25,7 +25,7 @@ export default function ImageWall({ itemData }) {
       sx={{
         width: 800,
         height: 600,
-        overflowY: "scroll",
+        overflowY: "scroll", 
         justifyContent: "center",
         "&::-webkit-scrollbar": {
           display: "none",
